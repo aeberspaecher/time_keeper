@@ -64,21 +64,29 @@ def book_time(tk_file, time_spent, project, date):
     _append_to_log(tk_file, line)
 
 
-def archive():
+def archive(tk_filename, archive_filename):
     """End current tracking period.
 
-    Move all data to log.
+    Move all data to archive and delete contents of log.
     """
 
-    # read current log
+    log_curr_period = _read_log(tk_filename)
 
-    # sort current log
+    dates, projects, durations = sort_log(log_curr_period)
 
-    # write sorted log to archive
+    archive_file = file(archive_filename, mode="a")
+    archive_file.write("\nTimekeeping period ended %s:\n"
+                       %dt.date.today().isoformat())
 
-    # TODO: implement
+    for date, project, duration in zip(dates, projects, durations):
+        archive_file.write("%s %s %s\n"%(date, project, duration))
 
-    pass
+    archive_file.close()
+
+    # close current reporting period by deleting content of log:
+    f = file(tk_filename, mode="w").close()  # open for writing and closing deletes contents
+
+    print("Activities moved to archive, started new time keeping period.")
 
 
 def get_report(tk_file, report_dates=None, report_projects=None):

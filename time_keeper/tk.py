@@ -168,4 +168,4 @@ if(__name__ == '__main__'):
 
         print report
     elif(command == "archive"):
-        raise NotImplementedError("Archiving not implemented yet")
+        tk.archive(tk_file, tk_archive_path)
