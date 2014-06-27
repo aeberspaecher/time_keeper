@@ -18,11 +18,11 @@ def find_command(args):
     """Find command in argument list.
     """
 
-    # TODO: refactor that loop below
+    # TODO: refactor that loop below to something more elegant
 
     i = 0
     while(args[i].lower() not in valid_commands):
-        i +=1
+        i += 1
         if(i == len(args)):
             raise ValueError("No valid command given.")
 
@@ -51,12 +51,18 @@ def find_command_options(args, command):
 
 
 def find_project(args):
+    """Parse arguments and return the argument if it is a project name, i.e.
+    if it starts with a '+'.
+    """
+
     for arg in args:
         if arg.startswith("+"): return arg[1:]
 
 
 def _parse_time(list_repr):
-    # create tuple (hours, minute) from strings such as "4h 30min", "12min"...
+    """Create a tuple (hours, minutes) from strings such as "4h 30min", "12min"...
+    """
+
     hours, minutes = 0, 0
     a = {"h": 0, "min": 0, "hrs": 0, "mins": 0}
     for block in list_repr:
@@ -80,8 +86,9 @@ def _parse_time(list_repr):
 
 
 def _get_time(hours, minutes):
-    # return time in valid format. e.g., 1h and 70 min should convert to
-    # 2h 10 min
+    """Return time in a valid format, e.g. 2 hours and 70 minutes convert
+    to 3 hours and 10 minutes.
+    """
 
     hours, minutes = divmod(60*hours + minutes, 60)
 
@@ -107,13 +114,6 @@ def _get_booking_date(opts):
         booking_date = dt.date.today()  # assume the work was done today
 
     return booking_date
-
-
-def _get_date_from_delta(opts):
-    if opts.when.endswith("d"):
-        pass
-    else:
-        raise ValueError("Invalid booking time given")
 
 
 if(__name__ == '__main__'):

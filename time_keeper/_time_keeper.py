@@ -8,12 +8,8 @@ import datetime as dt
 import subprocess as sp
 
 # the time_keeper.txt format is as follows:
-#2014-05-26 Project1 1h 37 min
-#2014-05-26 Project1 12 min
-
-# paths to files used - need to be set before using any of the routines:
-todo_file = None  # TODO: do we need that?
-tk_archive_file = None
+# 2014-05-26 Project1 1:37
+# 2014-05-26 Project1 0:12
 
 weekday_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
                  "Saturday", "Sunday"]
@@ -182,7 +178,7 @@ def sort_log(log_lines):
     Parameters
     ----------
     log_lines : list
-        Log lines as returned by a readline() call.
+        Log lines as returned by a _read_log() call.
 
     Returns
     -------
