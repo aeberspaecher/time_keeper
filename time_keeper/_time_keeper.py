@@ -309,7 +309,7 @@ def _minutes_to_duration(minutes):
 
     hours, minutes = divmod(minutes, 60)
 
-    return str(hours) + ":" + "%2.i"%(minutes)
+    return str(hours) + ":" + "%02d"%(minutes)
 
 
 def _get_unique_items(iterable):
