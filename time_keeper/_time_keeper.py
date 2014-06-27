@@ -110,6 +110,14 @@ def get_report(tk_file, report_dates=None, report_projects=None):
     log_lines = _read_log(tk_file)
     dates, projects, durations = sort_log(log_lines)
 
+    # for kinds of reporting, all bookings on individual projects will be
+    # summed up and reported. create and initialize a dictionary that holds
+    # summed effort:
+    summed_times = {}
+    unique_projects = _get_unique_items(projects)
+    for unique_project in unique_projects:  # initialize summed times
+        summed_times[unique_project] = 0
+
     # if specific date given:
     if(report_dates is not None):
         for report_date in report_dates:
@@ -120,6 +128,8 @@ def get_report(tk_file, report_dates=None, report_projects=None):
             for date, project, duration in zip(dates, projects, durations):
                 if(date == report_date):
                     report += "\t%s: %s\n"%(project, duration)
+                    summed_times[project] += _duration_to_minutes(duration)
+
     elif(report_projects is not None):
         # report on a per project-base first:
 
@@ -136,21 +146,8 @@ def get_report(tk_file, report_dates=None, report_projects=None):
                     report += "\t%s: %s\n"%(date, duration)
                     summed_times[project] += _duration_to_minutes(duration)
 
-        # finally report summed times:
-
-        report += "\nSummed times spent:\n"
-        for project in report_projects:
-            report += (project + ": "
-                       + str(_minutes_to_duration(summed_times[project]))
-                       + "\n"
-                       )
-
     else:  # report for whole reporting period wanted
         curr_date = None
-        summed_times = {}
-        unique_projects = _get_unique_items(projects)
-        for unique_project in unique_projects:  # initialize summed times
-            summed_times[unique_project] = 0
 
         for date, project, duration in zip(dates, projects, durations):
             if(date != curr_date):
@@ -160,14 +157,13 @@ def get_report(tk_file, report_dates=None, report_projects=None):
             report += "\t%s: %s\n"%(project, duration)
             summed_times[project] += _duration_to_minutes(duration)
 
-        # finally report summed times:
-
-        report += "\nSummed times spent:\n"
-        for project in unique_projects:
-            report += (project + ": "
-                       + str(_minutes_to_duration(summed_times[project]))
-                       + "\n"
-                       )
+    # finally report summed times:
+    report += "\nSummed times spent:\n"
+    for project in summed_times.keys():
+        report += (project + ": "
+                   + str(_minutes_to_duration(summed_times[project]))
+                   + "\n"
+                   )
 
     return report
 
