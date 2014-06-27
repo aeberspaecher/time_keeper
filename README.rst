@@ -1,8 +1,8 @@
 Time Keeper
 ===========
 
-Rationale
----------
+About
+-----
 
 You keep track of your tasks and projects with a TODO.txt tool? And you want to
 or have to keep track how much time you spent on which project? You don't want
