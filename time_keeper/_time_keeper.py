@@ -313,21 +313,21 @@ def _minutes_to_duration(minutes):
 
 
 def _get_unique_items(iterable):
-    """Get unique items in an iterable.
+    """Get unique items in an container.
 
     Parameters
     ----------
-    iterable : iterable
+    iterable : container
 
     Returns
     -------
-    unique_items : list
+    unique_items : container
+        The container of unique items. Is of the same type as the input
+        container.
     """
 
-    unique_items = []
+    in_type = type(iterable)
 
-    for item in iterable:
-        if(not item in unique_items):
-            unique_items.append(item)
+    unique_items = in_type(set(iterable))
 
     return unique_items
