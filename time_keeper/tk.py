@@ -106,7 +106,7 @@ def _get_booking_date(opts):
             # assume delta is given in days:
             booking_date = dt.date.today() + dt.timedelta(days=delta)
         elif(dash_count == 2):  # date
-            year, month, day = arg.split("-")
+            year, month, day = tk._get_date_tuple_from_string(opts.when)
             booking_date = dt.date(year, month, day)
         else:
             raise ValueError("Unknown booking date format.")

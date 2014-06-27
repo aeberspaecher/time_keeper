@@ -45,8 +45,8 @@ Getting help::
 Booking time on projects::
 
     tk book 1h +ComplicatedProject  # book one hour on ComplicatedProject
-    tk book 27min +AProject -3d  # book 27min of work spent on AProjct three days ago
-    tk book 1h 01min +AProject 2014-06-29
+    tk book 27min +AProject --when=-3d  # book 27min of work spent on AProjct three days ago
+    tk book 1h 01min +AProject --when=2014-06-29
 
 
 Reporting activity::
