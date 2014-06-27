@@ -112,6 +112,10 @@ def get_report(tk_file, report_dates=None, report_projects=None):
     report = ""
 
     log_lines = _read_log(tk_file)
+    if(len(log_lines) == 0):
+        report = "No activities booked yet."
+        return report
+
     dates, projects, durations = sort_log(log_lines)
 
     # for kinds of reporting, all bookings on individual projects will be
