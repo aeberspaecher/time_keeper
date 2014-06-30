@@ -30,8 +30,8 @@ Configure and install::
     ./waf configure
     sudo ./waf install
 
-The location of your todo.txt file, and time_keeper's tk.txt, tk_report.txt
-files are read from the environment variable ``$TIMEKEEPERPATH``.
+The location of time_keeper's tk.txt ad tk_report.txt files are read from the
+environment variable ``$TIMEKEEPERPATH``.
 
 Usage
 -----
@@ -58,3 +58,9 @@ Reporting activity::
 Starting a new tracking period::
 
     tk archive  # archive current time keeping
+
+Fixing errors
+-------------
+
+When you happen to enter something wrong, you may easily correct your mistake by
+editing ``$TIMEKEEPERPATH/tk.txt``.
