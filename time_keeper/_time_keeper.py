@@ -56,7 +56,7 @@ def book_time(tk_file, time_spent, project, date):
 
     # append time to log:
     hours, minutes = int(time_spent[0]), int(time_spent[1])
-    line = "%s %s %s:%s\n"%(date, project, hours, minutes)
+    line = "%s %s %s:%02d\n"%(date, project, hours, minutes)
     _append_to_log(tk_file, line)
 
 
