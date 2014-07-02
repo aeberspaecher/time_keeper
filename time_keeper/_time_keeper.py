@@ -70,7 +70,7 @@ def archive(tk_filename, archive_filename):
 
     dates, projects, durations = sort_log(log_curr_period)
 
-    archive_file = file(archive_filename, mode="a")
+    archive_file = open(archive_filename, mode="a")
     archive_file.write("\nTimekeeping period ended %s:\n"
                        %dt.date.today().isoformat())
 
@@ -80,7 +80,7 @@ def archive(tk_filename, archive_filename):
     archive_file.close()
 
     # close current reporting period by deleting content of log:
-    f = file(tk_filename, mode="w").close()  # open for writing and closing deletes contents
+    f = open(tk_filename, mode="w").close()  # open for writing and closing deletes contents
 
     print("Activities moved to archive, started new time keeping period.")
 
@@ -209,7 +209,7 @@ def sort_log(log_lines):
 
 def _read_log(tk_file):
     try:
-        lines = file(tk_file, mode="r").readlines()
+        lines = open(tk_file, mode="r").readlines()
     except IOError:
         print("Error reading logfile. Have you booked time yet?")
         lines = ""
@@ -251,7 +251,7 @@ def _append_to_log(tk_file, line):
         The line to add.
     """
 
-    with file(tk_file, mode="a") as f:
+    with open(tk_file, mode="a") as f:
         f.write(line)
 
 

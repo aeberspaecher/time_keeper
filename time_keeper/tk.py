@@ -166,6 +166,6 @@ if(__name__ == '__main__'):
         report = tk.get_report(tk_file, report_dates=report_dates,
                                report_projects=report_projects)
 
-        print report
+        print(report)
     elif(command == "archive"):
         tk.archive(tk_file, tk_archive_path)

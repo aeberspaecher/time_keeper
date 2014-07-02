@@ -19,6 +19,6 @@ def build(bld):
         install_path="${PYTHONDIR}/time_keeper")
 
     bld.install_as("${PREFIX}/bin/tk", "time_keeper/tk.py",
-                   chmod=0755)
+                   chmod=0o755)
 
     # TODO: install tk.py
